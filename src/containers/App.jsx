@@ -1,10 +1,12 @@
 import React from 'react';
 import Header from '../components/Header';
-import '../assets/styles/App.scss';
 import Search from '../components/Search';
 import Categories from '../components/Categories';
 import Carousel from '../components/Carousel';
 import CarouselItem from '../components/CarouselItem';
+import Footer from '../components/Footer';
+
+import '../assets/styles/App.scss';
 
 export default function App() {
   return (
@@ -21,6 +23,7 @@ export default function App() {
           <CarouselItem />
         </Carousel>
       </Categories>
+      <Footer />
     </div>
   );
 }
