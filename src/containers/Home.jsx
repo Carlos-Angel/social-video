@@ -11,7 +11,7 @@ import '../assets/styles/App.scss';
 
 const API = 'http://localhost:3000/initalState';
 
-export default function App() {
+export default function Home() {
   const initialState = useInitialState(API);
   return (
     <div className='App'>
