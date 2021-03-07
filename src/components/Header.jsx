@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import '../assets/styles/components/Header.scss';
 import logo from '../assets/static/logo-platzi-video-BW2.png';
 import userIcon from '../assets/static/user-icon.png';
@@ -6,7 +8,9 @@ import userIcon from '../assets/static/user-icon.png';
 export default function Header() {
   return (
     <header className='header'>
-      <img className='header__img' src={logo} alt='Platzi Video' />
+      <Link to='/'>
+        <img className='header__img' src={logo} alt='Platzi Video' />
+      </Link>
       <div className='header__menu'>
         <div className='header__menu--profile'>
           <img src={userIcon} alt='' />
@@ -17,7 +21,7 @@ export default function Header() {
             <a href='/'>Cuenta</a>
           </li>
           <li>
-            <a href='/'>Cerrar Sesión</a>
+            <Link to='/login'>Iniciar Sesión</Link>
           </li>
         </ul>
       </div>
