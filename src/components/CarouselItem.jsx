@@ -1,17 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import { setFavorite } from '../actions';
 
 import '../assets/styles/components/CarouselItem.scss';
 import playIcon from '../assets/static/play-icon.png';
 import plusIcon from '../assets/static/plus-icon.png';
 
-export default function CarouselItem({
+function CarouselItem({
   cover,
   title,
   contentRating,
   duration,
-  year
+  year,
+  setFavorite
 }) {
+  const handleSetFavorite = () => {
+    setFavorite({
+      cover,
+      title,
+      contentRating,
+      year,
+      duration
+    });
+  };
   return (
     <div className='carousel-item'>
       <img className='carousel-item__img' src={cover} alt='' />
@@ -26,6 +39,7 @@ export default function CarouselItem({
             className='carousel-item__details--img'
             src={plusIcon}
             alt='Plus Icon'
+            onClick={handleSetFavorite}
           />
         </div>
         <p className='carousel-item__details--title'>{title}</p>
@@ -44,3 +58,9 @@ CarouselItem.propTypes = {
   duration: PropTypes.number,
   year: PropTypes.number
 };
+
+const mapDispatchToProps = {
+  setFavorite
+};
+
+export default connect(null, mapDispatchToProps)(CarouselItem);
