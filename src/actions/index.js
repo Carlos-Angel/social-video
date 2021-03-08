@@ -4,3 +4,10 @@ export function setFavorite(payload) {
     payload
   };
 }
+
+export function deleteFavorite(payload) {
+  return {
+    type: 'DELETE_FAVORITE',
+    payload
+  };
+}
