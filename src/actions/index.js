@@ -11,3 +11,10 @@ export function deleteFavorite(payload) {
     payload
   };
 }
+
+export function loginRequest(payload) {
+  return {
+    type: 'LOGIN_REQUEST',
+    payload
+  };
+}

@@ -1,18 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { loginRequest } from '../actions';
+
 import googleIcon from '../assets/static/icons8-google-plus-50.png';
 import twitterIcon from '../assets/static/icons8-twitter-50.png';
 import '../assets/styles/components/Login.scss';
 
-export default function Login() {
+function Login(props) {
+  const [form, setForm] = useState({ email: '' });
+
+  const handleInput = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.loginRequest(form);
+    props.history.push('/');
+  };
+
   return (
     <section className='login'>
       <section className='login__container'>
         <h2>Inicia sesión</h2>
-        <form className='login__container--form'>
-          <input className='input' type='text' placeholder='Correo' />
-          <input className='input' type='password' placeholder='Contraseña' />
-          <button className='button'>Iniciar sesión</button>
+        <form className='login__container--form' onSubmit={handleSubmit}>
+          <input
+            name='email'
+            className='input'
+            type='text'
+            placeholder='Correo'
+            onChange={handleInput}
+          />
+          <input
+            name='password'
+            className='input'
+            type='password'
+            placeholder='Contraseña'
+            onChange={handleInput}
+          />
+          <button type='submit' className='button'>
+            Iniciar sesión
+          </button>
           <div className='login__container--remember-me'>
             <label>
               <input type='checkbox' id='cbox1' value='first_checkbox' />{' '}
@@ -37,3 +70,9 @@ export default function Login() {
     </section>
   );
 }
+
+const mapDispatchToProps = {
+  loginRequest
+};
+
+export default connect(null, mapDispatchToProps)(Login);
