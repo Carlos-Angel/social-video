@@ -24,6 +24,12 @@ export default function reducer(state, action) {
         user: action.payload
       };
       break;
+    case 'LOGOUT_REQUEST':
+      return {
+        ...state,
+        user: action.payload
+      };
+      break;
     default:
       return state;
       break;
