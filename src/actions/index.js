@@ -25,3 +25,10 @@ export function logoutRequest(payload) {
     payload
   };
 }
+
+export function registerRequest(payload) {
+  return {
+    type: 'REGISTER_REQUEST',
+    payload
+  };
+}
