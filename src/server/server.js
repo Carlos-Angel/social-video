@@ -5,9 +5,10 @@ import webpack from 'webpack';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
-import { createStore, compose } from 'redux';
+import { createStore } from 'redux';
 import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
+import helmet from 'helmet';
 
 import initialState from '../frontend/initialState';
 import reducer from '../frontend/reducers';
@@ -28,6 +29,11 @@ if (ENV === 'development') {
 
   app.use(webpackDevMiddleware(compiler, serverConfig));
   app.use(webpackHotMiddleware(compiler));
+} else {
+  app.use(express.static(`${__dirname}/public`));
+  app.use(helmet());
+  app.use(helmet.permittedCrossDomainPolicies());
+  app.disable('x-powered-by');
 }
 
 const setResponse = (html, preloadedState) => {
