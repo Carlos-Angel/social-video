@@ -33,6 +33,29 @@ if (ENV === 'development') {
   app.use(express.static(`${__dirname}/public`));
   app.use(helmet());
   app.use(helmet.permittedCrossDomainPolicies());
+  app.use(
+    helmet({
+      contentSecurityPolicy: false,
+    }),
+  );
+  // app.use(
+  //   helmet.contentSecurityPolicy({
+  //     directives: {
+  //       'default-src': [
+  //         "'self'",
+  //         'https://fonts.googleapis.com/css?family=Muli&display=swap',
+  //       ],
+  //       'script-src': [
+  //         "'self'",
+  //         'sha256-lKtLIbt/r08geDBLpzup7D3pTCavi4hfYSO45z98900=',
+  //       ],
+  //       'img-src': ["'self'", 'http://dummyimage.com', 'https://gravatar.com'],
+  //       'style-src-elem': ["'self'", 'https://fonts.googleapis.com'],
+  //       'font-src': ['https://fonts.gstatic.com'],
+  //       'media-src': ['*'],
+  //     },
+  //   }),
+  // );
   app.disable('x-powered-by');
 }
 

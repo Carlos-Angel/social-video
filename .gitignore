@@ -209,3 +209,6 @@ $RECYCLE.BIN/
 
 # Build server
 src/server/public
+
+#vscode
+.vscode
