@@ -19,7 +19,7 @@ function CarouselItem(props) {
       title,
       contentRating,
       year,
-      duration
+      duration,
     });
   };
 
@@ -69,12 +69,12 @@ CarouselItem.propTypes = {
   title: PropTypes.string,
   contentRating: PropTypes.string,
   duration: PropTypes.number,
-  year: PropTypes.number
+  year: PropTypes.number,
 };
 
 const mapDispatchToProps = {
   setFavorite,
-  deleteFavorite
+  deleteFavorite,
 };
 
 export default connect(null, mapDispatchToProps)(CarouselItem);

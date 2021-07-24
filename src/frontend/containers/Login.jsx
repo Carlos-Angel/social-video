@@ -15,7 +15,7 @@ function Login(props) {
   const handleInput = (e) => {
     setForm({
       ...form,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -50,8 +50,9 @@ function Login(props) {
               Iniciar sesión
             </button>
             <div className='login__container--remember-me'>
-              <label>
-                <input type='checkbox' id='cbox1' value='first_checkbox' />{' '}
+              <label htmlFor='cbox1'>
+                <input type='checkbox' id='cbox1' value='first_checkbox' />
+                {' '}
                 Recuérdame
               </label>
               <a href='/'>Olvidé mi contraseña</a>
@@ -59,10 +60,16 @@ function Login(props) {
           </form>
           <section className='login__container--social-media'>
             <div>
-              <img src={googleIcon} /> Inicia sesión con Google
+              <img src={googleIcon} alt='Google icon' />
+              {' '}
+              Inicia sesión con
+              Google
             </div>
             <div>
-              <img src={twitterIcon} /> Inicia sesión con Twitter
+              <img src={twitterIcon} alt='twitter icon' />
+              {' '}
+              Inicia sesión con
+              Twitter
             </div>
           </section>
           <p className='login__container--register'>
@@ -76,7 +83,7 @@ function Login(props) {
 }
 
 const mapDispatchToProps = {
-  loginRequest
+  loginRequest,
 };
 
 export default connect(null, mapDispatchToProps)(Login);

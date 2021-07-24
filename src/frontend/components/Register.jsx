@@ -13,7 +13,7 @@ function Register(props) {
   const handleInput = (e) => {
     setForm({
       ...form,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -62,7 +62,7 @@ function Register(props) {
 }
 
 const mapDispatchToProps = {
-  registerRequest
+  registerRequest,
 };
 
 export default connect(null, mapDispatchToProps)(Register);

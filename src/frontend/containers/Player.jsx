@@ -9,7 +9,8 @@ import '../assets/styles/components/Player.scss';
 function Player(props) {
   // eslint-disable-next-line react/destructuring-assignment
   const { id } = props.match.params;
-  const hasPlaying = Object.keys(props.playing).length > 0;
+  const { playing, history } = props;
+  const hasPlaying = Object.keys(playing).length > 0;
 
   useEffect(() => {
     props.getVideoSource(id);
@@ -18,9 +19,9 @@ function Player(props) {
   return hasPlaying ? (
     <div className='Player'>
       <video controls autoPlay>
-        <source src={props.playing.source} type='video/mp4' />
+        <source src={playing.source} type='video/mp4' />
         <div className='Player-back'>
-          <button type='button' onClick={() => props.history.goBack()}>
+          <button type='button' onClick={() => history.goBack()}>
             Regresar
           </button>
         </div>
@@ -33,12 +34,12 @@ function Player(props) {
 
 const mapStateToProps = (state) => {
   return {
-    playing: state.playing
+    playing: state.playing,
   };
 };
 
 const mapDispatchToProps = {
-  getVideoSource
+  getVideoSource,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player);

@@ -15,7 +15,7 @@ export default {
       cover: 'http://dummyimage.com/800x600.png/99118E/ffffff',
       description: 'Vestibulum ac est lacinia nisi venenatis tristique',
       source:
-        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
     },
     {
       id: 3,
@@ -29,7 +29,7 @@ export default {
       cover: 'http://dummyimage.com/800x600.png/302140/ffffff',
       description: 'Vestibulum ac est lacinia nisi venenatis tristique',
       source:
-        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'
+        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
     },
     {
       id: 4,
@@ -43,7 +43,7 @@ export default {
       cover: 'http://dummyimage.com/800x600.png/5472FF/ffffff',
       description: 'Vestibulum ac est lacinia nisi venenatis tristique',
       source:
-        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4'
+        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
     },
     {
       id: 5,
@@ -57,7 +57,7 @@ export default {
       cover: 'http://dummyimage.com/800x600.png/B36F20/ffffff',
       description: 'Vestibulum ac est lacinia nisi venenatis tristique',
       source:
-        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4'
+        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
     },
     {
       id: 6,
@@ -71,7 +71,7 @@ export default {
       cover: 'http://dummyimage.com/800x600.png/CCC539/ffffff',
       description: 'Vestibulum ac est lacinia nisi venenatis tristique',
       source:
-        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'
+        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
     },
     {
       id: 7,
@@ -85,8 +85,8 @@ export default {
       cover: 'http://dummyimage.com/800x600.png/FF7A90/ffffff',
       description: 'Vestibulum ac est lacinia nisi venenatis tristique',
       source:
-        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4'
-    }
+        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
+    },
   ],
   originals: [
     {
@@ -101,7 +101,7 @@ export default {
       cover: 'http://dummyimage.com/800x600.png/306880/ffffff',
       description: 'Vestibulum ac est lacinia nisi venenatis tristique',
       source:
-        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
     },
     {
       id: 9,
@@ -115,7 +115,7 @@ export default {
       cover: 'http://dummyimage.com/800x600.png/604180/ffffff',
       description: 'Vestibulum ac est lacinia nisi venenatis tristique',
       source:
-        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4'
+        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
     },
     {
       id: 10,
@@ -129,7 +129,7 @@ export default {
       cover: 'http://dummyimage.com/800x600.png/FF91BA/ffffff',
       description: 'Vestibulum ac est lacinia nisi venenatis tristique',
       source:
-        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4'
+        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
     },
     {
       id: 11,
@@ -143,7 +143,7 @@ export default {
       cover: 'http://dummyimage.com/800x600.png/45807C/ffffff',
       description: 'Vestibulum ac est lacinia nisi venenatis tristique',
       source:
-        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4'
+        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4',
     },
     {
       id: 12,
@@ -157,7 +157,7 @@ export default {
       cover: 'http://dummyimage.com/800x600.png/577380/ffffff',
       description: 'Vestibulum ac est lacinia nisi venenatis tristique',
       source:
-        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4'
+        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
     },
     {
       id: 13,
@@ -171,7 +171,7 @@ export default {
       cover: 'http://dummyimage.com/800x600.png/5472FF/ffffff',
       description: 'Vestibulum ac est lacinia nisi venenatis tristique',
       source:
-        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4'
-    }
-  ]
+        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4',
+    },
+  ],
 };

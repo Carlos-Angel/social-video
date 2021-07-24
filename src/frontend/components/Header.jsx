@@ -20,7 +20,7 @@ function Header(props) {
 
   const headerClass = classNames('header', {
     isLogin,
-    isRegister
+    isRegister,
   });
 
   return (
@@ -45,7 +45,7 @@ function Header(props) {
           )}
           {hasUser ? (
             <li>
-              <a href='#' onClick={handleLogout}>
+              <a href='/' onClick={handleLogout}>
                 Cerrar sesión
               </a>
             </li>
@@ -62,12 +62,12 @@ function Header(props) {
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user,
   };
 }
 
 const mapDispatchToProps = {
-  logoutRequest
+  logoutRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
