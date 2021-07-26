@@ -1,6 +1,5 @@
 /* eslint-disable global-require */
 import express from 'express';
-import dotenv from 'dotenv';
 import webpack from 'webpack';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
@@ -21,8 +20,7 @@ import getManifest from './getManifest';
 import { config } from './config';
 import { authApp } from './routes';
 
-dotenv.config();
-const { ENV, PORT } = process.env;
+const { dev, port } = config;
 
 const app = express();
 
@@ -33,7 +31,7 @@ app.use(session({ secret: config.sessionSecret }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-if (ENV === 'development') {
+if (dev) {
   const webpackConfig = require('../../webpack.config');
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
@@ -105,7 +103,7 @@ const renderApp = (req, res) => {
 authApp(app);
 app.get('*', renderApp);
 
-app.listen(PORT, (err) => {
+app.listen(port, (err) => {
   if (err) console.log(err);
-  else console.log(`Server running on http://localhost:${PORT}`);
+  else console.log(`Server running on http://localhost:${port}`);
 });
