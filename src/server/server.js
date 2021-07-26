@@ -9,16 +9,29 @@ import { createStore } from 'redux';
 import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import helmet from 'helmet';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import passport from 'passport';
 
 import initialState from '../frontend/initialState';
 import reducer from '../frontend/reducers';
 import serverRoutes from '../frontend/routes/serverRoutes';
 import getManifest from './getManifest';
 
+import { config } from './config';
+import { authApp } from './routes';
+
 dotenv.config();
 const { ENV, PORT } = process.env;
 
 const app = express();
+
+/** middleware */
+app.use(express.json());
+app.use(cookieParser());
+app.use(session({ secret: config.sessionSecret }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 if (ENV === 'development') {
   const webpackConfig = require('../../webpack.config');
@@ -88,6 +101,8 @@ const renderApp = (req, res) => {
   res.send(setResponse(html, preloadedState, req.hasManifest));
 };
 
+/** routes */
+authApp(app);
 app.get('*', renderApp);
 
 app.listen(PORT, (err) => {
