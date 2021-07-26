@@ -57,6 +57,7 @@ if (dev) {
   app.disable('x-powered-by');
 }
 
+// prettier-ignore
 const setResponse = (html, preloadedState, manifest) => {
   const mainStyles = manifest ? manifest['vendors.css'] : 'assets/app.css';
   const mainBuild = manifest ? manifest['main.js'] : 'assets/app.js';
@@ -74,10 +75,7 @@ const setResponse = (html, preloadedState, manifest) => {
   <body>
     <div id="app">${html}</div>
     <script>
-    window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
-      /</g,
-      '\\u003c',
-    )}
+    window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
     </script>
     <script src="${mainBuild}" type="text/javascript" ></script>
     <script src="${venderBuild}" type="text/javascript" ></script>
