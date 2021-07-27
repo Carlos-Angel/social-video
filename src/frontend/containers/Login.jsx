@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { loginRequest } from '../actions';
+import { loginUser } from '../actions';
 import Header from '../components/Header';
 
 import googleIcon from '../assets/static/icons8-google-plus-50.png';
@@ -21,8 +21,7 @@ function Login(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.loginRequest(form);
-    props.history.push('/');
+    props.loginUser(form, '/');
   };
 
   return (
@@ -52,7 +51,6 @@ function Login(props) {
             <div className='login__container--remember-me'>
               <label htmlFor='cbox1'>
                 <input type='checkbox' id='cbox1' value='first_checkbox' />
-                {' '}
                 Recuérdame
               </label>
               <a href='/'>Olvidé mi contraseña</a>
@@ -61,15 +59,11 @@ function Login(props) {
           <section className='login__container--social-media'>
             <div>
               <img src={googleIcon} alt='Google icon' />
-              {' '}
-              Inicia sesión con
-              Google
+              Inicia sesión con Google
             </div>
             <div>
               <img src={twitterIcon} alt='twitter icon' />
-              {' '}
-              Inicia sesión con
-              Twitter
+              Inicia sesión con Twitter
             </div>
           </section>
           <p className='login__container--register'>
@@ -83,7 +77,7 @@ function Login(props) {
 }
 
 const mapDispatchToProps = {
-  loginRequest,
+  loginUser,
 };
 
 export default connect(null, mapDispatchToProps)(Login);
