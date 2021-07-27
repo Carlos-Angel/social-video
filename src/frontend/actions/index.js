@@ -86,7 +86,7 @@ export const registerMyFavoriteMovie = (movie) => {
   return (dispatch) => {
     axios
       .post('/user-movies', { movieId: movie._id })
-      .then(() => dispatch(setFavorite(movie)))
+      .then(({ data }) => dispatch(setFavorite({ _id: data.data, movie })))
       .catch((error) => dispatch(setError(error)));
   };
 };
