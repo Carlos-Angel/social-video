@@ -94,11 +94,19 @@ const renderApp = async (req, res) => {
       method: 'get',
     });
 
+    let myList = await axios({
+      url: `${config.apiUrl}/api/v1/user-movies?userId=${id}`,
+      headers: { Authorization: `Bearer ${token}` },
+      method: 'get',
+    });
+
     movieList = movieList.data.data;
+
+    myList = myList.data.data;
 
     initialState = {
       user: { email, name, id },
-      myList: [],
+      myList,
       trends: movieList.filter(
         (movie) => movie.contentRating === 'PG' && movie._id !== undefined,
       ),

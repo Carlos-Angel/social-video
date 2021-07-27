@@ -19,7 +19,7 @@ function Home({ myList, trends, originals }) {
           <Carousel>
             {myList.map((item) => (
               // eslint-disable-next-line react/jsx-props-no-spreading
-              <CarouselItem key={item.id} {...item} isList={true} />
+              <CarouselItem key={item._id} {...item.movie} isList={true} />
             ))}
           </Carousel>
         </Categories>
