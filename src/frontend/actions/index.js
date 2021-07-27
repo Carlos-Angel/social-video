@@ -53,7 +53,7 @@ export const registerUser = (payload, redirectUrl) => {
       .post('/auth/sign-up', payload)
       .then(({ data }) => dispatch(registerRequest(data)))
       .then(() => {
-        window.location.href = '/login';
+        window.location.href = redirectUrl;
       })
       .catch((error) => dispatch(setError(error)));
   };
