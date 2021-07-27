@@ -44,13 +44,23 @@ function authApp(app) {
   router.post('/sign-up', async (req, res, next) => {
     const { body: user } = req;
     try {
-      await axios({
+      const result = await axios({
         url: `${config.apiUrl}/api/v1/auth/sign-up`,
         method: 'post',
-        data: user,
+        data: {
+          email: user.email,
+          name: user.name,
+          password: user.password,
+        },
       });
 
-      res.status(201).json({ message: 'user created' });
+      const userData = result.data;
+
+      res.status(201).json({
+        name: req.body.name,
+        email: req.body.email,
+        id: userData.data.id,
+      });
     } catch (error) {
       next(error);
     }
