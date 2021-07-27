@@ -30,7 +30,7 @@ function Home({ myList, trends, originals }) {
           <Carousel>
             {trends.map((item) => (
               // eslint-disable-next-line react/jsx-props-no-spreading
-              <CarouselItem key={item.id} {...item} />
+              <CarouselItem key={item._id} {...item} />
             ))}
           </Carousel>
         </Categories>
@@ -41,7 +41,7 @@ function Home({ myList, trends, originals }) {
           <Carousel>
             {originals.map((item) => (
               // eslint-disable-next-line react/jsx-props-no-spreading
-              <CarouselItem key={item.id} {...item} />
+              <CarouselItem key={item._id} {...item} />
             ))}
           </Carousel>
         </Categories>
