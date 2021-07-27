@@ -18,6 +18,7 @@ import getManifest from './getManifest';
 
 import { config } from './config';
 import { authApp } from './routes';
+import axios from 'axios';
 
 const { dev, port } = config;
 
@@ -82,18 +83,30 @@ const setResponse = (html, preloadedState, manifest) => {
   </html>
   `;
 };
-const renderApp = (req, res) => {
+const renderApp = async (req, res) => {
   let initialState;
-  const { email, name, id } = req.cookies;
+  const { email, name, id, token } = req.cookies;
 
-  if (id) {
+  try {
+    let movieList = await axios({
+      url: `${config.apiUrl}/api/v1/movies`,
+      headers: { Authorization: `Bearer ${token}` },
+      method: 'get',
+    });
+
+    movieList = movieList.data.data;
+
     initialState = {
       user: { email, name, id },
       myList: [],
-      trends: [],
-      originals: [],
+      trends: movieList.filter(
+        (movie) => movie.contentRating === 'PG' && movie._id !== undefined,
+      ),
+      originals: movieList.filter(
+        (movie) => movie.contentRating === 'G' && movie._id !== undefined,
+      ),
     };
-  } else {
+  } catch (error) {
     initialState = {
       user: {},
       myList: [],
