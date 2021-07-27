@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export function setFavorite(payload) {
   return {
     type: 'SET_FAVORITE',
@@ -39,3 +41,20 @@ export function getVideoSource(payload) {
     payload,
   };
 }
+
+export const setError = (payload) => ({
+  type: 'SET_ERROR',
+  payload,
+});
+
+export const registerUser = (payload, redirectUrl) => {
+  return (dispatch) => {
+    axios
+      .post('/auth/sign-up', payload)
+      .then(({ data }) => dispatch(registerRequest(data)))
+      .then(() => {
+        window.location.href = '/login';
+      })
+      .catch((error) => dispatch(setError(error)));
+  };
+};
