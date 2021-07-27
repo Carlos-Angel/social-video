@@ -1,7 +1,9 @@
 export default function reducer(state, action) {
   switch (action.type) {
     case 'SET_FAVORITE': {
-      const exists = state.myList.find((item) => item.id === action.payload.id);
+      const exists = state.myList.find(
+        (item) => item._id === action.payload._id,
+      );
 
       if (exists) {
         return { ...state };
@@ -15,7 +17,7 @@ export default function reducer(state, action) {
     case 'DELETE_FAVORITE':
       return {
         ...state,
-        myList: state.myList.filter((items) => items.id !== action.payload),
+        myList: state.myList.filter((items) => items._id !== action.payload),
       };
     case 'LOGIN_REQUEST':
       return {
@@ -36,8 +38,8 @@ export default function reducer(state, action) {
       return {
         ...state,
         playing:
-          state.trends.find((item) => item.id === Number(action.payload)) ||
-          state.originals.find((item) => item.id === Number(action.payload)) ||
+          state.trends.find((item) => item._id === Number(action.payload)) ||
+          state.originals.find((item) => item._id === Number(action.payload)) ||
           [],
       };
 
