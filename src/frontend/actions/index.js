@@ -90,3 +90,14 @@ export const registerMyFavoriteMovie = (movie) => {
       .catch((error) => dispatch(setError(error)));
   };
 };
+
+export const removeMovieFromMyFavorites = (movieId) => {
+  return (dispatch, getState) => {
+    const { myList } = getState();
+    const userMovie = myList.find((favorite) => favorite.movie._id === movieId);
+    axios
+      .delete(`/user-movies/${userMovie._id}`)
+      .then(() => dispatch(deleteFavorite(userMovie._id)))
+      .catch((error) => dispatch(setError(error)));
+  };
+};

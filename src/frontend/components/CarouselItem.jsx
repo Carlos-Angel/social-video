@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { registerMyFavoriteMovie, deleteFavorite } from '../actions';
+import {
+  registerMyFavoriteMovie,
+  removeMovieFromMyFavorites,
+} from '../actions';
 
 import '../assets/styles/components/CarouselItem.scss';
 import playIcon from '../assets/static/play-icon.png';
@@ -24,7 +27,7 @@ function CarouselItem(props) {
   };
 
   const handleDeleteFavorite = (itemId) => {
-    props.deleteFavorite(itemId);
+    props.removeMovieFromMyFavorites(itemId);
   };
   return (
     <div className='carousel-item'>
@@ -74,7 +77,7 @@ CarouselItem.propTypes = {
 
 const mapDispatchToProps = {
   registerMyFavoriteMovie,
-  deleteFavorite,
+  removeMovieFromMyFavorites,
 };
 
 export default connect(null, mapDispatchToProps)(CarouselItem);
