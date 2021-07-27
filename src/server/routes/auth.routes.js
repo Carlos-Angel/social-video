@@ -5,7 +5,7 @@ const axios = require('axios');
 const { config } = require('../config');
 
 const THIRTY_DAYS_IN_SEC = 2592000000;
-const TWO_HOURS_IN_SEC = 7200000;
+const TWO_HOURS_IN_SEC = config.dev ? 2592000000 : 7200000;
 
 /** basic strategy */
 require('../utils/auth/strategies/basic');
@@ -21,9 +21,9 @@ function authApp(app) {
         if (error || !data) {
           next(boom.unauthorized());
         }
-        req.login(data, { session: false }, async (error) => {
-          if (error) {
-            next(error);
+        req.login(data, { session: false }, async (err) => {
+          if (err) {
+            next(err);
           }
 
           const { token, ...user } = data.data;
@@ -35,8 +35,8 @@ function authApp(app) {
           });
           res.status(200).json(user);
         });
-      } catch (error) {
-        next(error);
+      } catch (err) {
+        next(err);
       }
     })(req, res, next);
   });
