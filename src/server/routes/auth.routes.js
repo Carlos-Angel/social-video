@@ -5,7 +5,7 @@ const axios = require('axios');
 const { config } = require('../config');
 
 const THIRTY_DAYS_IN_SEC = 2592000000;
-const TWO_HOURS_IN_SEC = config.dev ? 2592000000 : 7200000;
+const TWO_HOURS_IN_SEC = config.dev ? 259200000000000 : 7200000;
 
 /** basic strategy */
 require('../utils/auth/strategies/basic');

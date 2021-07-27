@@ -11,14 +11,14 @@ import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import passport from 'passport';
+import axios from 'axios';
 
 import reducer from '../frontend/reducers';
 import serverRoutes from '../frontend/routes/serverRoutes';
 import getManifest from './getManifest';
 
 import { config } from './config';
-import { authApp } from './routes';
-import axios from 'axios';
+import { authApp, userMovieApp } from './routes';
 
 const { dev, port } = config;
 
@@ -131,6 +131,7 @@ const renderApp = async (req, res) => {
 };
 
 /** routes */
+userMovieApp(app);
 authApp(app);
 app.get('*', renderApp);
 

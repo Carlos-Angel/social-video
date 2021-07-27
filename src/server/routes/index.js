@@ -1,4 +1,7 @@
-/* eslint-disable global-require */
+const authApp = require('./auth.routes');
+const userMovieApp = require('./userMovie.routes');
+
 module.exports = {
-  authApp: require('./auth.routes'),
+  authApp,
+  userMovieApp,
 };
