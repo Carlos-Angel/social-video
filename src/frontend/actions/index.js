@@ -83,7 +83,14 @@ export const loginUser = ({ email, password }, redirectUrl) => {
 };
 
 export const registerMyFavoriteMovie = (movie) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const { myList } = getState();
+    const existMovieInMyFavorites = myList.find(
+      (favorite) => favorite.movie._id === movie._id,
+    );
+
+    if (existMovieInMyFavorites) return;
+
     axios
       .post('/user-movies', { movieId: movie._id })
       .then(({ data }) => dispatch(setFavorite({ _id: data.data, movie })))
