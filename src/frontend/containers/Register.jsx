@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { registerUser } from '../actions';
-import Header from './Header';
+import Header from '../components/Header';
 
 import '../assets/styles/components/Register.scss';
 
