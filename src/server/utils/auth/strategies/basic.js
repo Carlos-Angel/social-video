@@ -20,11 +20,11 @@ passport.use(
       });
 
       if (!data || status !== 200) {
-        return callback(boom.unauthorized(), false);
+        callback(boom.unauthorized(), false);
       }
-      return callback(null, data);
+      callback(null, data);
     } catch (error) {
-      return callback(error);
+      callback(error);
     }
   }),
 );
