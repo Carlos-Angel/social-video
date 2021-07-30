@@ -1,8 +1,8 @@
-# social media app ![Status badge](https://img.shields.io/badge/status-in%20progress-yellow)
+# social video app ![Status badge](https://img.shields.io/badge/status-in%20progress-yellow)
 
 website utilizando server side render con react y express.
 
-[social media app](https://social-video-app.herokuapp.com/register)
+[social video app](https://social-video-app.herokuapp.com/register)
 
 ## Requisitos
 
@@ -11,7 +11,7 @@ para que funcione este repositorio frontend es necesario que clone el repositori
 ## Instalación
 
 1. Clona este proyecto.
-2. Ve a la carpeta del proyecto `cd social-media`
+2. Ve a la carpeta del proyecto `cd social-video`
 3. Copia el archivo `.env.example` y cambia el nombre del archivo a `.env` para el ambiente local.
 4. Instala las dependencias ejecutando el comando `npm install`
 5. Corre el ambiente local ejecutando el comando `npm run start:dev`
