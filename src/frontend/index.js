@@ -22,8 +22,10 @@ const store = createStore(
 
 delete window.__PRELOADED_STATE__;
 
+const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate;
+
 //prettier-ignore
-ReactDOM.hydrate(
+renderMethod(
   <Provider store={store}>
     <Router history={history}>
       <App isLogged={(preloadedState.user.id)} />
