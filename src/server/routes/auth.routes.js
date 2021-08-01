@@ -19,22 +19,23 @@ function authApp(app) {
     passport.authenticate('basic', (error, data) => {
       try {
         if (error || !data) {
-          next(boom.unauthorized());
-        }
-        req.login(data, { session: false }, async (err) => {
-          if (err) {
-            next(err);
-          }
+          const { statusCode } = error;
+          res.status(statusCode).json({ message: 'Invalid password or email ', error: true });
+        } else {
+          req.login(data, { session: false }, async (err) => {
+            if (err) {
+              next(err);
+            }
+            const { token, ...user } = data.data;
 
-          const { token, ...user } = data.data;
-
-          res.cookie('token', token, {
-            httpOnly: !config.dev,
-            secure: !config.dev,
-            maxAge: rememberMe ? THIRTY_DAYS_IN_SEC : TWO_HOURS_IN_SEC,
+            res.cookie('token', token, {
+              httpOnly: !config.dev,
+              secure: !config.dev,
+              maxAge: rememberMe ? THIRTY_DAYS_IN_SEC : TWO_HOURS_IN_SEC,
+            });
+            res.status(200).json(user);
           });
-          res.status(200).json(user);
-        });
+        }
       } catch (err) {
         next(err);
       }
@@ -62,7 +63,8 @@ function authApp(app) {
         id: userData.data.id,
       });
     } catch (error) {
-      next(error.response.data);
+      const { statusCode, message } = error.response.data;
+      res.status(statusCode).json({ message, error: true });
     }
   });
 }

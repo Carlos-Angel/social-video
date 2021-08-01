@@ -28,7 +28,8 @@ function userMovieApp(app) {
 
       res.status(201).json(data);
     } catch (error) {
-      next(error);
+      const { statusCode, message } = error.response.data;
+      res.status(statusCode).json({ message, error: true });
     }
   });
   routes.delete('/:userMovieId', async (req, res, next) => {
@@ -48,7 +49,8 @@ function userMovieApp(app) {
 
       res.status(200).json(data);
     } catch (error) {
-      next(error);
+      const { statusCode, message } = error.response.data;
+      res.status(statusCode).json({ message, error: true });
     }
   });
 }

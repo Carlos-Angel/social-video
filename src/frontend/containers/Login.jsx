@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { loginUser } from '../actions';
 import Header from '../components/Header';
+import notification from '../utils/notification';
 
 import googleIcon from '../assets/static/icons8-google-plus-50.png';
 import twitterIcon from '../assets/static/icons8-twitter-50.png';
@@ -11,6 +12,13 @@ import '../assets/styles/components/Login.scss';
 
 function Login(props) {
   const [form, setForm] = useState({ email: '' });
+  // eslint-disable-next-line react/destructuring-assignment
+  const { message, type } = props.notification;
+
+  useEffect(() => {
+    notification({ message, type });
+    // eslint-disable-next-line react/destructuring-assignment
+  }, [props.notification]);
 
   const handleInput = (e) => {
     setForm({
@@ -80,4 +88,6 @@ const mapDispatchToProps = {
   loginUser,
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+const mapStateToProps = (reducer) => reducer;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

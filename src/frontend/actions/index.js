@@ -57,9 +57,11 @@ export const registerUser = (payload, redirectUrl) => async (dispatch) => {
     dispatch(registerRequest(data));
     window.location.href = redirectUrl;
   } catch (error) {
+    const { message } = error.response.data;
     dispatch(
       setNotification({
-        message: 'ops! something went wrong, please try again later.',
+        message:
+          message || 'ops! something went wrong, please try again later.',
         type: 'error',
       }),
     );
@@ -84,9 +86,11 @@ export const loginUser =
       dispatch(loginRequest(data.user));
       window.location.href = redirectUrl;
     } catch (error) {
+      const { message } = error.response.data;
       dispatch(
         setNotification({
-          message: 'ops! something went wrong, please try again later.',
+          message:
+            message || 'ops! something went wrong, please try again later.',
           type: 'error',
         }),
       );
@@ -106,9 +110,11 @@ export const registerMyFavoriteMovie =
 
       dispatch(setFavorite({ _id: data.data, movie }));
     } catch (error) {
+      const { message } = error.response.data;
       dispatch(
         setNotification({
-          message: 'ops! something went wrong, please try again later.',
+          message:
+            message || 'ops! something went wrong, please try again later.',
           type: 'error',
         }),
       );
@@ -126,9 +132,11 @@ export const removeMovieFromMyFavorites =
 
       dispatch(deleteFavorite(userMovie._id));
     } catch (error) {
+      const { message } = error.response.data;
       dispatch(
         setNotification({
-          message: 'ops! something went wrong, please try again later.',
+          message:
+            message || 'ops! something went wrong, please try again later.',
           type: 'error',
         }),
       );
