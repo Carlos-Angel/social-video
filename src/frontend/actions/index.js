@@ -51,84 +51,86 @@ export const cleanNotification = () => ({
   type: 'CLEAN_NOTIFICATION',
 });
 
-export const registerUser = (payload, redirectUrl) => {
-  return (dispatch) => {
-    axios
-      .post('/auth/sign-up', payload)
-      .then(({ data }) => dispatch(registerRequest(data)))
-      .then(() => {
-        window.location.href = redirectUrl;
-      })
-      .catch(() => dispatch(
-        setNotification({
-          message: 'ops! something went wrong, please try again later.',
-          type: 'error',
-        }),
-      ));
-  };
-};
-
-export const loginUser = ({ email, password }, redirectUrl) => {
-  return (dispatch) => {
-    axios({
-      url: '/auth/sign-in',
-      method: 'post',
-      auth: {
-        username: email,
-        password,
-      },
-    })
-      .then(({ data }) => {
-        document.cookie = `email=${data.user.email}`;
-        document.cookie = `name=${data.user.name}`;
-        document.cookie = `id=${data.user.id}`;
-        dispatch(loginRequest(data.user));
-      })
-      .then(() => {
-        window.location.href = redirectUrl;
-      })
-      .catch(() => dispatch(
-        setNotification({
-          message: 'ops! something went wrong, please try again later.',
-          type: 'error',
-        }),
-      ));
-  };
-};
-
-export const registerMyFavoriteMovie = (movie) => {
-  return (dispatch, getState) => {
-    const { myList } = getState();
-    const existMovieInMyFavorites = myList.find(
-      (favorite) => favorite.movie._id === movie._id,
+export const registerUser = (payload, redirectUrl) => async (dispatch) => {
+  try {
+    const { data } = await axios.post('/auth/sign-up', payload);
+    dispatch(registerRequest(data));
+    window.location.href = redirectUrl;
+  } catch (error) {
+    dispatch(
+      setNotification({
+        message: 'ops! something went wrong, please try again later.',
+        type: 'error',
+      }),
     );
+  }
+};
 
-    if (existMovieInMyFavorites) return;
+export const loginUser =
+  ({ email, password }, redirectUrl) => async (dispatch) => {
+    try {
+      const { data } = await axios({
+        url: '/auth/sign-in',
+        method: 'post',
+        auth: {
+          username: email,
+          password,
+        },
+      });
 
-    axios
-      .post('/user-movies', { movieId: movie._id })
-      .then(({ data }) => dispatch(setFavorite({ _id: data.data, movie })))
-      .catch(() => dispatch(
+      document.cookie = `email=${data.user.email}`;
+      document.cookie = `name=${data.user.name}`;
+      document.cookie = `id=${data.user.id}`;
+      dispatch(loginRequest(data.user));
+      window.location.href = redirectUrl;
+    } catch (error) {
+      dispatch(
         setNotification({
           message: 'ops! something went wrong, please try again later.',
           type: 'error',
         }),
-      ));
+      );
+    }
   };
-};
 
-export const removeMovieFromMyFavorites = (movieId) => {
-  return (dispatch, getState) => {
-    const { myList } = getState();
-    const userMovie = myList.find((favorite) => favorite.movie._id === movieId);
-    axios
-      .delete(`/user-movies/${userMovie._id}`)
-      .then(() => dispatch(deleteFavorite(userMovie._id)))
-      .catch(() => dispatch(
+export const registerMyFavoriteMovie =
+  (movie) => async (dispatch, getState) => {
+    try {
+      const { myList } = getState();
+      const existMovieInMyFavorites = myList.find(
+        (favorite) => favorite.movie._id === movie._id,
+      );
+
+      if (existMovieInMyFavorites) return;
+      const { data } = await axios.post('/user-movies', { movieId: movie._id });
+
+      dispatch(setFavorite({ _id: data.data, movie }));
+    } catch (error) {
+      dispatch(
         setNotification({
           message: 'ops! something went wrong, please try again later.',
           type: 'error',
         }),
-      ));
+      );
+    }
   };
-};
+
+export const removeMovieFromMyFavorites =
+  (movieId) => async (dispatch, getState) => {
+    try {
+      const { myList } = getState();
+      const userMovie = myList.find(
+        (favorite) => favorite.movie._id === movieId,
+      );
+      await axios.delete(`/user-movies/${userMovie._id}`);
+
+      dispatch(deleteFavorite(userMovie._id));
+    } catch (error) {
+      dispatch(
+        setNotification({
+          message: 'ops! something went wrong, please try again later.',
+          type: 'error',
+        }),
+      );
+    }
+  };
