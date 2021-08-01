@@ -42,9 +42,13 @@ export function getVideoSource(payload) {
   };
 }
 
-export const setError = (payload) => ({
-  type: 'SET_ERROR',
-  payload,
+export const setNotification = ({ message, type }) => ({
+  type: 'SET_NOTIFICATION',
+  payload: { message, type },
+});
+
+export const cleanNotification = () => ({
+  type: 'CLEAN_NOTIFICATION',
 });
 
 export const registerUser = (payload, redirectUrl) => {
@@ -55,7 +59,12 @@ export const registerUser = (payload, redirectUrl) => {
       .then(() => {
         window.location.href = redirectUrl;
       })
-      .catch((error) => dispatch(setError(error)));
+      .catch(() => dispatch(
+        setNotification({
+          message: 'ops! something went wrong, please try again later.',
+          type: 'error',
+        }),
+      ));
   };
 };
 
@@ -78,7 +87,12 @@ export const loginUser = ({ email, password }, redirectUrl) => {
       .then(() => {
         window.location.href = redirectUrl;
       })
-      .catch((error) => dispatch(setError(error)));
+      .catch(() => dispatch(
+        setNotification({
+          message: 'ops! something went wrong, please try again later.',
+          type: 'error',
+        }),
+      ));
   };
 };
 
@@ -94,7 +108,12 @@ export const registerMyFavoriteMovie = (movie) => {
     axios
       .post('/user-movies', { movieId: movie._id })
       .then(({ data }) => dispatch(setFavorite({ _id: data.data, movie })))
-      .catch((error) => dispatch(setError(error)));
+      .catch(() => dispatch(
+        setNotification({
+          message: 'ops! something went wrong, please try again later.',
+          type: 'error',
+        }),
+      ));
   };
 };
 
@@ -105,6 +124,11 @@ export const removeMovieFromMyFavorites = (movieId) => {
     axios
       .delete(`/user-movies/${userMovie._id}`)
       .then(() => dispatch(deleteFavorite(userMovie._id)))
-      .catch((error) => dispatch(setError(error)));
+      .catch(() => dispatch(
+        setNotification({
+          message: 'ops! something went wrong, please try again later.',
+          type: 'error',
+        }),
+      ));
   };
 };

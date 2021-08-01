@@ -24,7 +24,7 @@ passport.use(
       }
       callback(null, data);
     } catch (error) {
-      callback(error);
+      callback(error.response.data);
     }
   }),
 );

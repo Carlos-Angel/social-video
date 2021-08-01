@@ -34,7 +34,19 @@ export default function reducer(state, action) {
           state.originals.find((item) => item._id === action.payload) ||
           [],
       };
-
+    case 'SET_NOTIFICATION':
+      return {
+        ...state,
+        notification: {
+          message: action.payload.message,
+          type: action.payload.type,
+        },
+      };
+    case 'CLEAN_NOTIFICATION':
+      return {
+        ...state,
+        notification: { message: '', type: '' },
+      };
     default:
       return state;
   }

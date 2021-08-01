@@ -62,7 +62,7 @@ function authApp(app) {
         id: userData.data.id,
       });
     } catch (error) {
-      next(error);
+      next(error.response.data);
     }
   });
 }

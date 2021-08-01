@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { registerUser } from '../actions';
 import Header from '../components/Header';
 
+import notification from '../utils/notification';
+
 import '../assets/styles/components/Register.scss';
 
 function Register(props) {
   const [form, setForm] = useState({ email: '', name: '', password: '' });
+  // eslint-disable-next-line react/destructuring-assignment
+  const { message, type } = props.notification;
+
+  useEffect(() => {
+    notification({ message, type });
+    // eslint-disable-next-line react/destructuring-assignment
+  }, [props.notification]);
 
   const handleInput = (e) => {
     setForm({
@@ -64,4 +73,6 @@ const mapDispatchToProps = {
   registerUser,
 };
 
-export default connect(null, mapDispatchToProps)(Register);
+const mapStateToProps = (reducer) => reducer;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

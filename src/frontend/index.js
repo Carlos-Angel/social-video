@@ -9,6 +9,7 @@ import { createBrowserHistory } from 'history';
 import App from './routes/App';
 import reducer from './reducers';
 
+import 'react-toastify/dist/ReactToastify.css';
 import './assets/styles/App.scss';
 
 const history = createBrowserHistory();
