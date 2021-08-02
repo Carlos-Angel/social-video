@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { loginUser } from '../actions';
+import { loginUser, cleanNotification } from '../actions';
 import Header from '../components/Header';
 import notification from '../utils/notification';
 
@@ -10,15 +10,15 @@ import googleIcon from '../assets/static/icons8-google-plus-50.png';
 import twitterIcon from '../assets/static/icons8-twitter-50.png';
 import '../assets/styles/components/Login.scss';
 
-function Login(props) {
+function Login({ loading, error, user, notification: { message, type }, loginUser, cleanNotification }) {
   const [form, setForm] = useState({ email: '' });
-  // eslint-disable-next-line react/destructuring-assignment
-  const { message, type } = props.notification;
 
   useEffect(() => {
-    notification({ message, type });
-    // eslint-disable-next-line react/destructuring-assignment
-  }, [props.notification]);
+    if (!loading && type !== '') {
+      notification({ message, type });
+    }
+    return () => cleanNotification();
+  }, [loading, error]);
 
   const handleInput = (e) => {
     setForm({
@@ -29,7 +29,7 @@ function Login(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.loginUser(form, '/');
+    loginUser(form, '/');
   };
 
   return (
@@ -86,6 +86,7 @@ function Login(props) {
 
 const mapDispatchToProps = {
   loginUser,
+  cleanNotification,
 };
 
 const mapStateToProps = (reducer) => reducer;

@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { registerUser } from '../actions';
+import { registerUser, cleanNotification } from '../actions';
 import Header from '../components/Header';
 
 import notification from '../utils/notification';
 
 import '../assets/styles/components/Register.scss';
 
-function Register(props) {
+function Register({ error, notification: { message, type }, registerUser, cleanNotification }) {
   const [form, setForm] = useState({ email: '', name: '', password: '' });
-  // eslint-disable-next-line react/destructuring-assignment
-  const { message, type } = props.notification;
-
   useEffect(() => {
-    notification({ message, type });
-    // eslint-disable-next-line react/destructuring-assignment
-  }, [props.notification]);
+    if (error) {
+      notification({ message, type });
+    }
+    return () => cleanNotification();
+  }, [error]);
 
   const handleInput = (e) => {
     setForm({
@@ -28,8 +27,13 @@ function Register(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.registerUser(form, '/login');
+    registerUser(form);
   };
+
+  if (!error && type === 'success') {
+    return <Redirect to='/login' />;
+  }
+
   return (
     <>
       <Header isRegister />
@@ -71,6 +75,7 @@ function Register(props) {
 
 const mapDispatchToProps = {
   registerUser,
+  cleanNotification,
 };
 
 const mapStateToProps = (reducer) => reducer;

@@ -51,15 +51,24 @@ export const cleanNotification = () => ({
   type: 'CLEAN_NOTIFICATION',
 });
 
-export const registerUser = (payload, redirectUrl) => async (dispatch) => {
+export const loading = () => ({
+  type: 'LOADING',
+});
+
+export const setError = ({ message, type }) => ({
+  type: 'SET_ERROR',
+  payload: { message, type },
+});
+
+export const registerUser = (payload) => async (dispatch) => {
+  dispatch(loading());
   try {
-    const { data } = await axios.post('/auth/sign-up', payload);
-    dispatch(registerRequest(data));
-    window.location.href = redirectUrl;
+    await axios.post('/auth/sign-up', payload);
+    dispatch(setNotification({ message: 'successful registration', type: 'success' }));
   } catch (error) {
     const { message } = error.response.data;
     dispatch(
-      setNotification({
+      setError({
         message:
           message || 'ops! something went wrong, please try again later.',
         type: 'error',
@@ -70,6 +79,7 @@ export const registerUser = (payload, redirectUrl) => async (dispatch) => {
 
 export const loginUser =
   ({ email, password }, redirectUrl) => async (dispatch) => {
+    dispatch(loading());
     try {
       const { data } = await axios({
         url: '/auth/sign-in',
@@ -79,7 +89,7 @@ export const loginUser =
           password,
         },
       });
-
+      dispatch(registerRequest({ email: data.user.email }));
       document.cookie = `email=${data.user.email}`;
       document.cookie = `name=${data.user.name}`;
       document.cookie = `id=${data.user.id}`;
@@ -88,7 +98,7 @@ export const loginUser =
     } catch (error) {
       const { message } = error.response.data;
       dispatch(
-        setNotification({
+        setError({
           message:
             message || 'ops! something went wrong, please try again later.',
           type: 'error',
@@ -99,6 +109,7 @@ export const loginUser =
 
 export const registerMyFavoriteMovie =
   (movie) => async (dispatch, getState) => {
+    dispatch(loading());
     try {
       const { myList } = getState();
       const existMovieInMyFavorites = myList.find(
@@ -112,7 +123,7 @@ export const registerMyFavoriteMovie =
     } catch (error) {
       const { message } = error.response.data;
       dispatch(
-        setNotification({
+        setError({
           message:
             message || 'ops! something went wrong, please try again later.',
           type: 'error',
@@ -123,6 +134,7 @@ export const registerMyFavoriteMovie =
 
 export const removeMovieFromMyFavorites =
   (movieId) => async (dispatch, getState) => {
+    dispatch(loading());
     try {
       const { myList } = getState();
       const userMovie = myList.find(
@@ -134,7 +146,7 @@ export const removeMovieFromMyFavorites =
     } catch (error) {
       const { message } = error.response.data;
       dispatch(
-        setNotification({
+        setError({
           message:
             message || 'ops! something went wrong, please try again later.',
           type: 'error',

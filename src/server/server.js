@@ -107,6 +107,8 @@ const renderApp = async (req, res) => {
     initialState = {
       user: { email, name, id },
       notification: { message: '', type: '' },
+      loading: false,
+      error: false,
       playing: {},
       myList,
       trends: movieList.filter(
@@ -120,6 +122,8 @@ const renderApp = async (req, res) => {
     initialState = {
       user: {},
       notification: { message: '', type: '' },
+      loading: false,
+      error: false,
       playing: {},
       myList: [],
       trends: [],
