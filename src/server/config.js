@@ -8,4 +8,9 @@ const config = {
   apiKeyToken: process.env.API_KEY_TOKEN,
 };
 
-module.exports = { config };
+const google = {
+  clientSecret: '',
+  clientID: '',
+};
+
+module.exports = { config, google };
