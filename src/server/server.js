@@ -18,7 +18,7 @@ import serverRoutes from '../frontend/routes/serverRoutes';
 import getManifest from './getManifest';
 
 import { config } from './config';
-import { authApp, userMovieApp } from './routes';
+import { authApp, userMovieApp, googleApp, oauthApp } from './routes';
 
 const { dev, port } = config;
 
@@ -149,6 +149,8 @@ const renderApp = async (req, res) => {
 /** routes */
 userMovieApp(app);
 authApp(app);
+googleApp(app);
+oauthApp(app);
 app.get('*', renderApp);
 
 app.listen(port, (err) => {
